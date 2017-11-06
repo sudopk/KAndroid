@@ -1,0 +1,71 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+
+ext {
+    bintrayRepo = 'KAndroid'
+    bintrayName = 'KAndroid'
+
+    publishedGroupId = 'com.sudopk'
+    libraryName = 'KAndroid'
+    artifact = 'KAndroidCommon' // Must be same name as Library name
+
+    libraryDescription = 'Helpful methods for Android in Kotlin.'
+
+    siteUrl = 'https://github.com/sudopk'
+    gitUrl = 'https://github.com/sudopk'
+
+    libraryVersion = '1.0.1'
+
+    developerId = 'sudopk'
+    developerName = 'Parveen Kumar'
+    developerEmail = 'sudopk@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+
+android {
+    compileSdkVersion 26
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            postprocessing {
+                removeUnusedCode false
+                removeUnusedResources false
+                obfuscate false
+                optimizeCode false
+                proguardFile 'proguard-rules.pro'
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation 'com.android.support:design:26.1.0'
+}
+
+// > Task :KAndroidCommon:javadoc
+// javadoc: error - Illegal package name:
+// "/home/sudopk/AndroidStudioProjects/KAndroid/KAndroidCommon/src/main/java/com/sudopk/kandroid
+// /Fragment.kt"
+tasks.withType(Javadoc).all { enabled = false }
+
+//Add these lines to publish library to bintray
+//Place it at the end of the file
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
