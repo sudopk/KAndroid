@@ -1,25 +1,29 @@
 package com.sudopk.kandroid
 
-fun Any.logv(message: String) {
-    logv(javaClass.simpleName, message)
-}
+import org.jetbrains.anko.*
 
-fun Any.logd(message: String) {
-    logd(javaClass.simpleName, message)
-}
+object Logger : AnkoLogger {
+    fun Any.logv(message: String) {
+        verbose(message)
+    }
 
-fun Any.logi(message: String) {
-    logi(javaClass.simpleName, message)
-}
+    fun Any.logd(message: String) {
+        debug(message)
+    }
 
-fun Any.logw(message: String) {
-    logw(javaClass.simpleName, message)
-}
+    fun Any.logi(message: String) {
+        info(message)
+    }
 
-fun Any.loge(message: String) {
-    loge(javaClass.simpleName, message)
-}
+    fun Any.logw(message: String) {
+        warn(message)
+    }
 
-fun Any.logf(message: String) {
-    logf(javaClass.simpleName, message)
+    fun Any.loge(message: String) {
+        error(message)
+    }
+
+    fun Any.logf(message: String) {
+        wtf(message)
+    }
 }

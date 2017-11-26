@@ -9,7 +9,7 @@ fun android.app.Fragment.application(): Application {
 }
 
 fun Fragment.application(): Application {
-    return activity.application
+    return activity!!.application
 }
 
 val Fragment.appCompatActivity
@@ -17,8 +17,8 @@ val Fragment.appCompatActivity
 
 inline fun <reified T> Fragment.parent() = (parentFragment ?: activity) as T
 
-inline fun Fragment.ifResumed(block: ()-> Unit) {
-    if(isResumed) {
+inline fun Fragment.ifResumed(block: () -> Unit) {
+    if (isResumed) {
         block()
     }
 }

@@ -12,7 +12,7 @@ private class StrFromResImpl(val context: Context) : StrFromRes {
     }
 }
 
-val Context.strFromRes : StrFromRes
+val Context.strFromRes: StrFromRes
     get() = StrFromResImpl(applicationContext)
 
 

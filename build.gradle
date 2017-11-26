@@ -9,6 +9,8 @@ buildscript {
         target_sdk_version = compile_sdk_version
         support_lib_version = '27.0.1'
         build_tools_version = support_lib_version
+
+        anko_version = '0.10.3'
     }
     repositories {
         google()
