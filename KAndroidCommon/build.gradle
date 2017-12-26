@@ -15,7 +15,7 @@ ext {
     siteUrl = 'https://github.com/sudopk'
     gitUrl = 'https://github.com/sudopk'
 
-    libraryVersion = '1.0.4'
+    libraryVersion = '1.0.5'
 
     developerId = 'sudopk'
     developerName = 'Parveen Kumar'
@@ -71,7 +71,11 @@ dependencies {
 // /Fragment.kt"
 tasks.withType(Javadoc).all { enabled = false }
 
-//Add these lines to publish library to bintray
-//Place it at the end of the file
+// Add these lines to publish library to bintray
+// Place it at the end of the file
+//
+// To uplaod a new version:
+//   1. Update the version number above ('libraryVersion' value)
+//   2. ./gradlew install && ./gradlew bintrayupload
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
 apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
