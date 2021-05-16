@@ -1,12 +1,8 @@
 package com.sudopk.kandroid
 
 import android.app.Application
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-
-fun android.app.Fragment.application(): Application {
-    return activity.application
-}
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 
 fun Fragment.application(): Application {
     return activity!!.application

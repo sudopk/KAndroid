@@ -1,8 +1,8 @@
 package com.sudopk.kandroid
 
-import android.support.annotation.IdRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.annotation.IdRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import kotlin.reflect.KClass
 
 
@@ -12,36 +12,33 @@ fun FragmentManager.replace(@IdRes containerId: Int, fragment: Fragment) {
             .commit()
 }
 
-fun FragmentManager.notFoundByTag(tag: String, block: (tag: String) -> Unit) {
+inline fun FragmentManager.notFoundByTag(tag: String, block: (tag: String) -> Unit) {
     executePendingTransactions()
-    if (findFragmentByTag(tag).isNull()) {
+    if (findFragmentByTag(tag) == null) {
         block(tag)
     }
 }
 
-fun FragmentManager.foundByTag(tag: String, block: (fragment: Fragment) -> Unit) {
+inline fun FragmentManager.foundByTag(tag: String, block: (fragment: Fragment) -> Unit) {
     executePendingTransactions()
-    val fragment = findFragmentByTag(tag)
-    if (fragment.isNotNull()) {
-        block(fragment)
-    }
+    findFragmentByTag(tag)?.let(block)
 }
 
-fun FragmentManager.notFoundById(@IdRes id: Int, fragmentClass: KClass<out Fragment>,
-                                 block: (id: Int) -> Unit) {
+inline fun <reified T: Fragment> FragmentManager.notFoundById(@IdRes id: Int,
+                                                                                                                                                block: (id: Int) -> Unit) {
     executePendingTransactions()
     val fragment = findFragmentById(id)
-    if (fragment.isNull() || fragment::class != fragmentClass) {
+    if (fragment == null || fragment::class != T::class) {
         block(id)
     }
 }
 
-fun FragmentManager.foundById(@IdRes id: Int, fragmentClass: KClass<out Fragment>,
-                              block: (fragment: Fragment) -> Unit) {
+ inline fun <reified T: Fragment> FragmentManager.foundById(@IdRes id: Int,
+                                                                                                                                              block: (fragment: T) -> Unit) {
     executePendingTransactions()
     val fragment = findFragmentById(id)
-    if (fragment.isNotNull() || fragment::class == fragmentClass) {
-        block(fragment)
+    if (fragment != null && fragment::class == T::class) {
+        block(fragment as T)
     }
 }
 

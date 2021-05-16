@@ -2,26 +2,19 @@
 
 buildscript {
     ext {
-        kotlin_version = '1.1.51'
+        kotlin_version = '1.4.32'
 
-        compile_sdk_version = 27
+        compile_sdk_version = 30
         minimum_sdk_version = 14
         target_sdk_version = compile_sdk_version
-        support_lib_version = '27.0.1'
-        build_tools_version = support_lib_version
-
-        anko_version = '0.10.3'
     }
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0-alpha06'
+        classpath 'com.android.tools.build:gradle:7.0.0-alpha15'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -31,7 +24,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 }
 

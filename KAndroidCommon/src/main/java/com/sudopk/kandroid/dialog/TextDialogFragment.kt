@@ -3,8 +3,8 @@ package com.sudopk.kandroid.dialog
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AppCompatDialogFragment
+import androidx.fragment.app.DialogFragment
+import androidx.appcompat.app.AppCompatDialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,6 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.sudopk.kandroid.R
-import org.jetbrains.anko.find
 
 class TextDialogFragment : AppCompatDialogFragment() {
 
@@ -35,7 +34,7 @@ class TextDialogFragment : AppCompatDialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (arguments!!.getString(TITLE).isNotBlank()) {
+        if (arguments?.getString(TITLE)?.isNotBlank() ?: false) {
             setStyle(DialogFragment.STYLE_NORMAL, R.style.Theme_AppCompat_Light_Dialog)
         } else {
             setStyle(DialogFragment.STYLE_NO_TITLE, 0)
@@ -45,9 +44,9 @@ class TextDialogFragment : AppCompatDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.text_dialog_fragment, container, false)
-        view.find<TextView>(R.id.message).text = arguments!!.getString(MESSAGE)
+        view.findViewById<TextView>(R.id.message).text = arguments!!.getString(MESSAGE)
 
-        val buttons = view.find<LinearLayout>(R.id.buttons)
+        val buttons = view.findViewById<LinearLayout>(R.id.buttons)
 
         buttons.removeAllViews()
 
@@ -102,7 +101,7 @@ class TextDialogFragment : AppCompatDialogFragment() {
         }
     }
 
-    override fun onCancel(dialog: DialogInterface?) {
+    override fun onCancel(dialog: DialogInterface) {
         super.onCancel(dialog)
         container.onDialogCanceled()
     }
